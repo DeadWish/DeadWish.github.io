@@ -123,5 +123,5 @@ theme: aircloud
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:DeadWish/DeadWish.github.io.git
-  branch: gh-pages
+  repo: https://github.com/DeadWish/DeadWish.github.io
+  branch: master
