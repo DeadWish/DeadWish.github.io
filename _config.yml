@@ -42,12 +42,12 @@ sidebar-avatar: img/avatar.jpg      # use absolute URL, seeing it's used in both
 
 # Friends
 # 友情链接
-friends: [
-{
-  title: "It helps SEO",
-  href: "#"
-}
-]
+#friends: [
+#{
+#  title: "It helps SEO",
+#  href: "#"
+#}
+#]
 
 comment:
   type: gitment
@@ -117,6 +117,9 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
+Plugins:
+- hexo-generator-cname
+
 theme: aircloud
 
 # Deployment
