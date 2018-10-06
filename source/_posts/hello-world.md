@@ -1,38 +1,19 @@
 ---
 title: Hello World
 ---
-Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
-## Quick Start
+折腾好几次个人博客了，都无疾而终。上一次更是悲剧，因为遗忘了它，导致几篇文章丢失了。
 
-### Create a new post
+我觉得工作和学习中，个人的知识和经验积累非常重要，所以记录是非常的重要。
 
-``` bash
-$ hexo new "My New Post"
-```
+博客应该聚焦到写作和记录，而不是折腾。以前为了新鲜，总去买些便宜的国外 VPS，挂上自己的博客，大部分时间用来折腾插件、样式，而记录的时间真的非常少。
 
-More info: [Writing](https://hexo.io/docs/writing.html)
+所以这次选择了 github pages，不仅不用担心数据丢失，网站的灵活性也会降低，直接使用他人共享的主题，直接聚焦于写作。这就是我想要的博客解决方案。
 
-### Run server
+以前想学很多东西，还写到 about 中，但其实自己根本没精力，或者不需要。博客内容也就不再定主题了，就是我平时学习的积累。
 
-``` bash
-$ hexo server
-```
+有时候研究东西草草略过，就是自己懒惰，有了博客也想提醒自己，让自己应该深入研究到原理中，并记录下来，改掉东看看西看看的毛病。
 
-More info: [Server](https://hexo.io/docs/server.html)
+如果你看到我的博客很久没更新了，请留言督促一下我哈哈。
 
-### Generate static files
-
-``` bash
-$ hexo generate
-```
-
-More info: [Generating](https://hexo.io/docs/generating.html)
-
-### Deploy to remote sites
-
-``` bash
-$ hexo deploy
-```
-
-More info: [Deployment](https://hexo.io/docs/deployment.html)
+allen
