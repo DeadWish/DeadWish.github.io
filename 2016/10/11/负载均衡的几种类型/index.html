@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Allen个人博客">
+    <meta name="keyword" content="allen">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        负载均衡的几种类型 - Allen&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <link href="//at.alicdn.com/t/font_849797_iaao523ycw8.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Make the Difference </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Allen Cao</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/motto/">
+                    <i class="iconfont icon-book"></i>
+                    <span>箴言</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-重定向负载均衡"><span class="toc-text">HTTP 重定向负载均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS域名解析负载均衡"><span class="toc-text">DNS域名解析负载均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向代理负载均衡"><span class="toc-text">反向代理负载均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络层负载均衡"><span class="toc-text">网络层负载均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据链路层负载均衡"><span class="toc-text">数据链路层负载均衡</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Make the Difference </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        负载均衡的几种类型
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2016-10-11 00:17:41</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#网络" title="网络">网络</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#基础知识" title="基础知识">基础知识</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <blockquote>
+<p>这篇文章是以前博客的，从转载看到，现在删减后搬运过来。</p>
+</blockquote>
+<p>负载均衡的目的就是让请求到达不同的服务器上。一次请求到服务器之间，有那么多环节，因此可以实现的方法有很多种，实际应用中不外乎以下几种方式。</p>
+<h2 id="HTTP-重定向负载均衡"><a href="#HTTP-重定向负载均衡" class="headerlink" title="HTTP 重定向负载均衡"></a>HTTP 重定向负载均衡</h2><p>HTTP 重定向负载均衡有一台重定向服务器，它也是一台普通的服务器，其唯一的功能就是根据用户的 HTTP 请求计算一台应用集群中服务器的地址，并将此地址写入 HTTP 重定向响应中返回给用户。</p>
+<p>这种方案实现起来非常简单，但是需要浏览器请求两次服务器才能完成。并且重定向服务器很容易编程瓶颈，因为一次重定向返回的过程，也是一次标准 HTTP 请求，如果集群内有10台机器，那 HTTP 重定向服务器的流量将是应用服务器的10倍，如果有100台估计就要宕机了，所以伸缩性能受到了很大的限制。还有使用302响应码重定向，不利于网站的SEO。</p>
+<h2 id="DNS域名解析负载均衡"><a href="#DNS域名解析负载均衡" class="headerlink" title="DNS域名解析负载均衡"></a>DNS域名解析负载均衡</h2><p>这是利用 DNS 处理域名解析请求的同时进行负载均衡处理的一种方案。在 DNS 中配置多个 A 记录，每次域名解析请求都会根据负载均衡算法计算一个不同的 IP 地址返回。</p>
+<p>DNS 域名解析负载均衡的优点是将负载均衡的工作转交给 DNS，省掉了网站管理维护负载均衡服务器的麻烦，同时还可以使用智能 DNS 可以基于地理位置或者 ISP 来做域名解析，用户将会得到距离最近或者速度最快的一个服务器地址，这样可以加快用户的访问速度，改善性能。</p>
+<p>但是这种方法也有很大的缺点，DNS 是多级解析，每一级都会缓存 DNS 记录，如果某个服务器变动了，DNS 记录更新的时间将会很长，这个速度取决于域名服务商。</p>
+<p>一般大型网站都会使用 DNS 域名解析，利用域名解析作为一级负载均衡手段。你可以使用 dig &lt;域名&gt; 的方法查看某个域名的A记录，你会发现很多网站会有多条 A 记录。</p>
+<h2 id="反向代理负载均衡"><a href="#反向代理负载均衡" class="headerlink" title="反向代理负载均衡"></a>反向代理负载均衡</h2><p>这种方法就是使用反向代理服务器，它一般在 web 服务器前面，这个位置也正好是负载均衡服务器的位置，所以大多数反向代理服务器同时也提供负载均衡的功能。</p>
+<p>由于 web 服务器不直接对外提供访问，因此 web 服务器不需要使用外部 IP，而反向代理服务器则需要配置双网卡和内部外部两套 IP 地址。</p>
+<p>反向代理服务器转发请求是在 HTTP 协议层面，因此也叫应用层负载均衡，由于应用层在七层网络模型中的第七层，所以一般也称为七层负载均衡。优点就是和反向代理服务器功能集成在一起，部署简单。缺点是反向代理服务器是所有请求和响应的中转站，其性能可能会成为瓶颈。</p>
+<h2 id="网络层负载均衡"><a href="#网络层负载均衡" class="headerlink" title="网络层负载均衡"></a>网络层负载均衡</h2><p>这种方法是在网络层通过修改请求目标地址进行负载均衡，网络层在七层网络层模型的第四层，所以也叫做四层负载均衡，也叫做 IP 层负载均衡。</p>
+<p>请求达到负载均衡服务器后，由负载均衡服务器在操作系统内核进程获取网络数据包，根据负载均衡算法得到一台真实 web 服务器的地址，然后修改请求的目的地址到这台真实的web服务器地址，等到 web 服务器处理完成后，响应数据包回到负载均衡服务器，再将数据包源地址修改为自身的 IP（负载均衡服务器的 IP）地址发送给用户浏览器。</p>
+<p>这里关键在于真实 web 服务器响应数据包如何返回给负载均衡服务器。一种是源地址转换（SNAT），第二种是负载均衡服务器作为网关服务器。</p>
+<p>网络层的负载均衡在内核进程完成数据转发，有更好的性能。但是由于响应请求的流量要经过负载均衡服务器，容易成为瓶颈。</p>
+<h2 id="数据链路层负载均衡"><a href="#数据链路层负载均衡" class="headerlink" title="数据链路层负载均衡"></a>数据链路层负载均衡</h2><p>数据链路层主要处理 mac 地址，所以使用修改 mac 地址进行转发请求。</p>
+<p>负载均衡数据分发过程中不修改 IP 地址，只修改 mac 地址，通过配置真实物理服务器集群所有机器虚拟IP和负载均衡服务器IP地址一致，从而达到不修改数据包的源地址和目的地址就可以进行数据分发的目的。</p>
+<p>由于 web 服务器的服务器地址 IP 和数据请求目的 IP 地址一致，不需要通过负载均衡服务器进行地址转换，可将相应数据包直接返回用户。</p>
+<p>如果有足够的公有 IP，其实 web 服务器也可以直接使用自己的IP响应请求，不过这样 web 服务器必须绑定负载均衡的虚拟 IP 地址（VIP），才能保证 web 服务器收到来自负载均衡发送的数据包。</p>
+<p>这种方式称作三角传输模式，单臂模式，也叫做直接路由方式（DR）。使用 DR 方式的链路层负载均衡是目前大型网站使用最广的一种负载均衡手段。</p>
+
+        
+        <div id="comment-container">
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/cao_yi">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/B_Allen">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/DeadWish">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a>
+    </p>
+    <p>
+        粤ICP备20012530号-1
+    </p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</html>
